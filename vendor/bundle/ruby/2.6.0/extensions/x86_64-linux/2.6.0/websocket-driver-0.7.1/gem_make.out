@@ -1,0 +1,15 @@
+current directory: /home/ubuntu/environment/MyCalendar/myCalendar/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.1/ext/websocket-driver
+/home/ubuntu/.rbenv/versions/2.6.5/bin/ruby -I /home/ubuntu/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200125-15598-1jfpdez.rb extconf.rb
+creating Makefile
+
+current directory: /home/ubuntu/environment/MyCalendar/myCalendar/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /home/ubuntu/environment/MyCalendar/myCalendar/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/ubuntu/environment/MyCalendar/myCalendar/vendor/bundle/ruby/2.6.0/gems/websocket-driver-0.7.1/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20200125-15598-yt61p
