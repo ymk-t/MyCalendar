@@ -4,22 +4,29 @@
         <v-dialog v-model="dialog" persistent max-width="600px">
           <v-card>
             <v-card-title>
-              <span class="headline">User Profile</span>
+              <span class="headline">新しい予定</span>
             </v-card-title>
             <v-card-text>
               <v-container>
                 <v-row>
                   <v-col cols="12">
-                    <v-text-field label="Email*" required></v-text-field>
+                    <v-text-field v-model="event.eventTitle" label="件名*" :rules="[required]"></v-text-field>
                   </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="event.eventStart" label="開始日時*" hint="2020-01-01 00:00:00" :rules="[required]"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field v-model="event.eventEnd" label="終了日時" hint="2020-01-01 00:00:00"></v-text-field>
+              </v-col>
+              <v-checkbox v-model="event.eventAllday" class="mx-2" label="終日"></v-checkbox>
                 </v-row>
               </v-container>
-              <small>*indicates required field</small>
+              <small>*必須項目</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click.stop="dialog = false">閉じる</v-btn>
-              <v-btn color="blue darken-1" text @click.stop="dialog = false">保存する</v-btn>
+              <v-btn class="vuetify-btn" @click.stop="dialog = false">閉じる</v-btn>
+              <v-btn class="vuetify-btn" :disable="( !event.eventTitle || !event.eventStart )" @click.stop="dialog = false">保存する</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -30,8 +37,23 @@
 <script>
   export default {
     props: { dialog: Boolean },
-    data: () => ({
-      dialog: this.dialog,
-    }),
+    data () {
+      return {
+        dialog: this.dialog,
+        event: {
+          eventTitle: '',
+          eventStart: '',
+          eventEnd: '',
+          eventAllday: ''
+        },
+        required: value => !!value || "必ず入力してください" 
+      }
+    },
   }
 </script>
+
+<style>
+  .vuetify-btn {
+    color: white!important
+  }
+</style>

@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_122408) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "title"
-    t.time "start"
-    t.time "end"
+    t.datetime "start"
+    t.datetime "end"
     t.boolean "allday"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -10,7 +10,7 @@
       :events="calendarEvents"
       @dateClick="handleDateClick"
     />
-    <EventForm :dialog="toggleDialog" />
+    <EventForm :dialog="toggleDialog" :eventStart="selectDay" />
   </div>
 </template>
 
@@ -24,11 +24,12 @@ import form from './form.vue'
 import '@fullcalendar/core/main.css'
 import '@fullcalendar/daygrid/main.css'
 import '@fullcalendar/timegrid/main.css'
+import axios from 'axios'
 
 export default {
   name: 'Calendar',
   components: {
-    FullCalendar, // make the <FullCalendar> tag available
+    FullCalendar,
     EventForm: form
   },
   data () {
@@ -49,19 +50,16 @@ export default {
         interactionPlugin
       ],
       // カレンダーに表示するスケジュール一覧
-      calendarEvents:  [
-        {
-          title: 'Happy BirthDay!',
-          start: '2020-02-26',
-          allDay: 'true'
-        }
-      ],
+      calendarEvents: [],
       toggleDialog: false,
+      selectDay: ''
     }
   },
   methods: {
     handleDateClick (arg) {
+      this.toggleDialog = false
       this.toggleDialog = true
+      this.selectDay = arg.dateStr
       // if (confirm('新しいスケジュールを' + arg.dateStr + 'に追加しますか ?')) {
       //   this.calendarEvents.push({ // add new event data
       //     title: '新規スケジュール',
@@ -70,6 +68,11 @@ export default {
       //   })
       // }
     }
+  },
+  created: function() {
+    axios.get(`api/events`).then(res => {
+      this.calendarEvents = res.data
+    });
   }
 }
 </script>
