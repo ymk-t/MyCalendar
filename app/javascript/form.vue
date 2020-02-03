@@ -26,7 +26,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn class="vuetify-btn" @click.stop="dialog = false">閉じる</v-btn>
-              <v-btn class="vuetify-btn" :disabled="( !event.eventTitle || !event.eventStart )" @click.stop="dialog = false">保存する</v-btn>
+              <v-btn class="vuetify-btn" :disabled="( !event.eventTitle || !event.eventStart )" @click.stop="createEvent">保存する</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: { dialog: Boolean },
     data () {
@@ -49,6 +50,16 @@
         required: value => !!value || "必ず入力してください" 
       }
     },
+    methods: {
+      createEvent () {
+        this.dialog = false;
+        axios.post('/api/events', { event: this.event }).then((res) => {
+          alert('予定が登録されました');
+        }, (error) => {
+          console.log(error);
+        });
+      }
+    }
   }
 </script>
 
