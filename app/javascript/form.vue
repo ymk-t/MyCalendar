@@ -26,7 +26,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn class="vuetify-btn" @click.stop="dialog = false">閉じる</v-btn>
-              <v-btn class="vuetify-btn" :disable="( !event.eventTitle || !event.eventStart )" @click.stop="dialog = false">保存する</v-btn>
+              <v-btn class="vuetify-btn" :disabled="( !event.eventTitle || !event.eventStart )" @click.stop="dialog = false">保存する</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
