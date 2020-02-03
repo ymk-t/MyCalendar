@@ -1,4 +1,6 @@
 class Api::EventsController < ApplicationController
+  protect_from_forgery :except => [:create]
+  
   def index
     @events = Event.all
     render 'index', formats: :json, handlers: 'jbuilder'
@@ -20,7 +22,7 @@ class Api::EventsController < ApplicationController
   
   def event_params
     params.fetch(:event, {}).permit(
-      :id, :title, :start, :end, :allday
+      :title, :start, :end, :allday
     )
   end
 end

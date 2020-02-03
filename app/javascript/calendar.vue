@@ -8,6 +8,7 @@
       :weekends="calendarWeekends"
       :plugins="calendarPlugins"
       :events="calendarEvents"
+      :timezone: 'Asia/Tokyo'
       @dateClick="handleDateClick"
     />
     <EventForm :dialog="toggleDialog" :eventStart="selectDay" />
