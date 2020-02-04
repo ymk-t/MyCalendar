@@ -53,12 +53,6 @@
         required: value => !!value || "必ず入力してください" 
       }
     },
-    computed: {
-      event: function() {
-        this.event.start = this.eventStart
-        return event
-      }
-    },
     methods: {
       createEvent () {
         this.dialog = false;
