@@ -2,16 +2,18 @@
   <div id='vcal'>
     <FullCalendar
       class='calendar-app'
+      ref="calendar"
       :defaultView="View"
       :locale="locale"
       :header="calendarHeader"
       :weekends="calendarWeekends"
       :plugins="calendarPlugins"
       :events="calendarEvents"
-      :timezone: 'Asia/Tokyo'
+      :timezone="calendarTime"
+      :ignoreTimezone="ignore"
       @dateClick="handleDateClick"
     />
-    <EventForm :dialog="toggleDialog" :eventStart="selectDay" />
+    <EventForm :dialog="toggleDialog" :eventStart="selectDay" @reloadEvent="reload"/>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ import '@fullcalendar/timegrid/main.css'
 import axios from 'axios'
 
 export default {
-  name: 'Calendar',
+  name: 'calendar',
   components: {
     FullCalendar,
     EventForm: form
@@ -37,7 +39,8 @@ export default {
     return {
       View: 'dayGridMonth',
       locale: jaLocale, // 日本語化
-      // カレンダーヘッダーのデザイン
+      calendarTime: 'local',
+      ignore: true,
       calendarHeader: {
         left: 'prev,next today',
         center: 'title',
@@ -68,6 +71,13 @@ export default {
       //     allDay: arg.allDay
       //   })
       // }
+    },
+    reload () {
+      axios.get(`api/events`).then(res => {
+        console.log("Reload Start!!")
+        this.calendarEvents = res.data
+        this.$refs.calendar.$emit('refetch-events')
+      });
     }
   },
   created: function() {

@@ -37,23 +37,34 @@
 <script>
   import axios from 'axios'
   export default {
-    props: { dialog: Boolean },
+    props: { 
+      dialog: Boolean,
+      eventStart: String
+    },
     data () {
       return {
         dialog: this.dialog,
         event: {
           title: '',
-          start: '',
+          start: this.eventStart,
           end: '',
           allday: false
         },
         required: value => !!value || "必ず入力してください" 
       }
     },
+    computed: {
+      event: function() {
+        this.event.start = this.eventStart
+        return event
+      }
+    },
     methods: {
       createEvent () {
         this.dialog = false;
         axios.post('/api/events', { event: this.event }).then((res) => {
+          this.$emit('reloadEvent');
+          this.dialog = false
           alert('予定が登録されました');
         }, (error) => {
           console.log(error);
