@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+MyCalendar
+====
 
-Things you may want to cover:
+This App is built on Ruby on Rails, Vue.js and FullCallendar library.
+It is also composed of MySQL, nginx, puma and EC2.
 
-* Ruby version
+I release it to online. Please check it!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+http://ec2-3-0-222-218.ap-southeast-1.compute.amazonaws.com/
